@@ -17,6 +17,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 $app['oauth_storage'] = function ($app) {
     if (!file_exists($sqliteDir = __DIR__.'/../data/oauth.sqlite')) {
         // generate sqlite if it does not exist
+        $app['logger']->debug('database will be created');
         include_once(__DIR__.'/../bin/rebuild_db.php');
     }
     return new OAuth2_Storage_Pdo(array('dsn' => 'sqlite:'.$sqliteDir));
