@@ -8,6 +8,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app['debug'] = true;
+$app->register(new Silex\Provider\MonologServiceProvider(), array(
+    'monolog.logfile' => __DIR__.'/../silex.log',
+    'monolog.level' => 100,
+));
 
 /* set up dependency injection container */
 $app['oauth_storage'] = function ($app) {
